@@ -43,9 +43,6 @@ public class RESTCookieSessionFilter implements Filter {
 	@Resource (name="jdbc/acmeairdatasource")
 	DataSource source1;
 	
-	@Resource (name="jdbc/acmeairdatasourcenonjta")
-	DataSource source2;
-	
 	@Override
 	public void destroy() {
 	}

@@ -7,7 +7,6 @@
   <persistence-unit name="acmeairunit" >
 
     <jta-data-source>java:comp/env/jdbc/acmeairdatasource</jta-data-source>
-    <non-jta-data-source>java:comp/env/jdbc/acmeairdatasourcenonjta</non-jta-data-source>
 
     <class>com.acmeair.entities.Customer</class>
     <class>com.acmeair.entities.CustomerSession</class>
@@ -26,7 +25,6 @@
           See also the create=true line in the datasource meta data. -->
       <property name="openjpa.jdbc.SynchronizeMappings"
                 value="buildSchema(ForeignKeys=true)" />
-      <property name="openjpa.jdbc.DBDictionary" value="derby" />
     </properties>
   </persistence-unit>
 

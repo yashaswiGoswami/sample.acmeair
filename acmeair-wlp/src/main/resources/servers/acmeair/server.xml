@@ -30,12 +30,4 @@
                     createDatabase="create" />
     </dataSource>
 
-    <dataSource id="jdbc/acmeairdatasourcenonjta"
-                jndiName="jdbc/acmeairdatasourcenonjta"
-                jdbcDriverRef="DerbyEmbedded"
-                transactional="false">
-        <properties databaseName="acmeairdatabase"
-                    createDatabase="create" />
-    </dataSource>
-
 </server>
