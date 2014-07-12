@@ -16,12 +16,19 @@
 package com.acmeair.entities;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class CustomerSession implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@Column(columnDefinition="VARCHAR")
 	private String id;
 	private String customerid;
 	private Date lastAccessedTime;

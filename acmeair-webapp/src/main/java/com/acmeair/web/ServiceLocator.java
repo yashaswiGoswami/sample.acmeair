@@ -16,11 +16,10 @@
 package com.acmeair.web;
 
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Logger;
 
 import javax.naming.NamingException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -30,7 +29,7 @@ public class ServiceLocator {
 
 	public static String REPOSITORY_LOOKUP_KEY = "com.acmeair.repository.type";
 	final ApplicationContext ctx;
-	private static Logger logger = LoggerFactory.getLogger(ServiceLocator.class);
+	private static Logger logger = Logger.getLogger(ServiceLocator.class.getName());
 
 	private static AtomicReference<ServiceLocator> singletonServiceLocator = new AtomicReference<ServiceLocator>();
 

@@ -13,44 +13,16 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 *******************************************************************************/
-package com.acmeair.entities;
+package com.acmeair.jpa.service;
 
-import java.io.Serializable;
+import org.springframework.stereotype.Service;
+import com.acmeair.service.KeyGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+@Service("keyGenerator")
+public class DefaultKeyGeneratorImpl implements KeyGenerator {
 
-@Entity
-public class AirportCodeMapping implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	private String id;
-	private String airportName;
-	
-	public AirportCodeMapping() {
+	@Override
+	public Object generate() {
+		return java.util.UUID.randomUUID().toString();
 	}
-	
-	public AirportCodeMapping(String airportCode, String airportName) {
-		this.id = airportCode;
-		this.airportName = airportName;
-	}
-	
-	public String getAirportCode() {
-		return id;
-	}
-	
-	public void setAirportCode(String airportCode) {
-		this.id = airportCode;
-	}
-	
-	public String getAirportName() {
-		return airportName;
-	}
-	
-	public void setAirportName(String airportName) {
-		this.airportName = airportName;
-	}
-
 }

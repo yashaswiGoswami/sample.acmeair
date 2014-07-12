@@ -17,9 +17,13 @@ package com.acmeair.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class CustomerAddress implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	 
 	private String streetAddress1;
 	private String streetAddress2;
 	private String city;

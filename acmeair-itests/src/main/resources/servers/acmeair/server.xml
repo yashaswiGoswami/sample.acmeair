@@ -1,0 +1,41 @@
+<server description="acmeair">
+
+    <!-- Enable features -->
+    <featureManager>
+        <feature>jsp-2.2</feature>
+        <feature>jaxrs-1.1</feature>
+        <feature>jndi-1.0</feature>
+        <feature>jdbc-4.0</feature>
+        <feature>jpa-2.0</feature>
+    </featureManager>
+    
+    <httpEndpoint id="defaultHttpEndpoint"
+                  host="*"
+                  httpPort="${httpPort}" >
+      <tcpOptions soReuseAddr="true"/>
+    </httpEndpoint>
+
+    <application  name="acmeair" type="war" location="acmeair.war"/>
+
+    <jdbcDriver id="DerbyEmbedded" libraryRef="DerbyLib" />
+    <library id="DerbyLib" filesetRef="DerbyFileset" />
+    <fileset id="DerbyFileset"
+             dir="${shared.resource.dir}/derby"
+             includes="derby.jar" />
+
+    <dataSource id="jdbc/acmeairdatasource"
+                jndiName="jdbc/acmeairdatasource"
+                jdbcDriverRef="DerbyEmbedded">
+        <properties databaseName="acmeairdatabase"
+                    createDatabase="create" />
+    </dataSource>
+
+    <dataSource id="jdbc/acmeairdatasourcenonjta"
+                jndiName="jdbc/acmeairdatasourcenonjta"
+                jdbcDriverRef="DerbyEmbedded"
+                transactional="false">
+        <properties databaseName="acmeairdatabase"
+                    createDatabase="create" />
+    </dataSource>
+
+</server>

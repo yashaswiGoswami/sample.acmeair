@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!-- ***************************************************************************
 * Copyright (c) 2013 IBM Corp.
 *
@@ -13,18 +14,19 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 **************************************************************************** -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    
     <parent>
         <groupId>com.acmeair</groupId>
         <artifactId>acmeair</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    
     <artifactId>acmeair-webapp</artifactId>
     <packaging>war</packaging>
     <name>acmeair-webapp</name>
-    <url>http://maven.apache.org</url>
+    
     <dependencies>
         <dependency>
             <groupId>com.acmeair</groupId>
@@ -38,7 +40,7 @@
         </dependency>
         <dependency>
             <groupId>com.acmeair</groupId>
-            <artifactId>acmeair-services-wxs</artifactId>
+            <artifactId>acmeair-services-jpa</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -74,19 +76,16 @@
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-jaxrs_1.1_spec</artifactId>
-            <version>1.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-servlet_3.0_spec</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.ibm.websphere.objectgrid</groupId>
-            <artifactId>objectgrid</artifactId>
-            <version>${objectgrid.version}</version>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-jpa_2.0_spec</artifactId>
             <scope>provided</scope>
         </dependency>
     </dependencies>

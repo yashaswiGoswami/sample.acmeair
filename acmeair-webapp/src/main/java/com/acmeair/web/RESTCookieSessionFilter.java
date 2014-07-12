@@ -17,6 +17,7 @@ package com.acmeair.web;
 
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -26,10 +27,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import com.acmeair.entities.CustomerSession;
 import com.acmeair.service.CustomerService;
-import com.acmeair.wxs.utils.TransactionService;
 
 public class RESTCookieSessionFilter implements Filter {
 	
@@ -38,40 +39,26 @@ public class RESTCookieSessionFilter implements Filter {
 	private static final String LOGOUT_PATH = "/rest/api/login/logout";
 	
 	private CustomerService customerService = ServiceLocator.getService(CustomerService.class);
-	private TransactionService transactionService = null; 
-	private boolean initializedTXService = false;
+	
+	@Resource (name="jdbc/acmeairdatasource")
+	DataSource source1;
+	
+	@Resource (name="jdbc/acmeairdatasourcenonjta")
+	DataSource source2;
 	
 	@Override
 	public void destroy() {
 	}
-
-	private TransactionService getTxService()
-	{
-		if (!this.initializedTXService)
-		{
-			this.initializedTXService = true;
-			transactionService = ServiceLocator.getService(TransactionService.class);
-		}
-		
-		return transactionService;
-	}
+	
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,	FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest)req;
 		HttpServletResponse response = (HttpServletResponse)resp;
 		
-		String path = request.getContextPath() + request.getServletPath() + request.getPathInfo();
-		// The following code is to ensure that OG is always set on the thread
-		try{
-			TransactionService txService = getTxService();
-			if (txService!=null)
-				txService.prepareForTransaction();
-		}catch( Exception e)
-		{
-			e.printStackTrace();
-		}
+		String path = request.getServletPath() + request.getPathInfo();
+		
 		// could do .startsWith for now, but plan to move LOGOUT to its own REST interface eventually
-		if (path.endsWith(LOGIN_PATH) || path.endsWith(LOGOUT_PATH)) {
+		if (path.endsWith(LOGIN_PATH) || path.endsWith(LOGOUT_PATH) || path.startsWith("/rest/api/loader/")) {
 			// if logging in, let the request flow
 			chain.doFilter(req, resp);
 			return;

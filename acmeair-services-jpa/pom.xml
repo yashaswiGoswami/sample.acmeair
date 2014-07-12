@@ -18,19 +18,34 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>com.acmeair</groupId>
         <artifactId>acmeair</artifactId>
+        <groupId>com.acmeair</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     
-    <artifactId>acmeair-services</artifactId>
-    <name>acmeair-services</name>
+    <artifactId>acmeair-services-jpa</artifactId>
+    <name>acmeair-services-jpa</name>
     
     <dependencies>
         <dependency>
             <groupId>com.acmeair</groupId>
             <artifactId>acmeair-common</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.acmeair</groupId>
+            <artifactId>acmeair-services</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
         </dependency>
     </dependencies>
 </project>

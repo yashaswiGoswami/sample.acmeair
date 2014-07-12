@@ -17,6 +17,12 @@ package com.acmeair.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Customer implements Serializable{
 
 	public enum MemberShipStatus { NONE, SILVER, GOLD, PLATINUM, EXEC_PLATINUM, GRAPHITE };
@@ -24,12 +30,15 @@ public class Customer implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@Column(columnDefinition="VARCHAR")
 	private String id;
 	private String password;
 	private MemberShipStatus status;
 	private int total_miles;
 	private int miles_ytd;
 
+	@Embedded
 	private CustomerAddress address;
 	private String phoneNumber;
 	private PhoneType phoneNumberType;
@@ -47,7 +56,7 @@ public class Customer implements Serializable{
 		this.phoneNumber = phoneNumber;
 		this.phoneNumberType = phoneNumberType;
 	}
-
+	
 	public String getUsername() {
 		return id;
 	}

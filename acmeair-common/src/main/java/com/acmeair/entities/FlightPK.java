@@ -16,12 +16,16 @@
 package com.acmeair.entities;
 
 import java.io.Serializable;
-import com.ibm.websphere.objectgrid.plugins.PartitionableKey;
 
-public class FlightPK implements Serializable,PartitionableKey{
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class FlightPK implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name="flightId")
 	private String id;
 	private String flightSegmentId;
 	
@@ -49,10 +53,6 @@ public class FlightPK implements Serializable,PartitionableKey{
 	}
 	
 	
-	@Override
-	public Object ibmGetPartition() {
-		return this.flightSegmentId;
-	}
 
 	@Override
 	public int hashCode() {

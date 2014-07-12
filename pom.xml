@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!-- ***************************************************************************
 * Copyright (c) 2013 IBM Corp.
 *
@@ -14,64 +15,135 @@
 * limitations under the License.
 **************************************************************************** -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>com.acmeair</groupId>
-  <artifactId>acmeair</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-
-  <properties>
-        <objectgrid.version>8.6.0.2</objectgrid.version>
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>com.acmeair</groupId>
+    <artifactId>acmeair</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.version>3.1.2.RELEASE</spring.version>
-        <jmeter.version>2.7</jmeter.version>
-  </properties>
-
-  <modules>
-    <module>acmeair-common</module>
-    <module>acmeair-loader</module>
-    <module>acmeair-services</module>
-    <module>acmeair-services-wxs</module>
-    <module>acmeair-webapp</module>
-    <module>acmeair-driver</module>
-  </modules>
-
-  <dependencies>
+    </properties>
+    
+    <modules>
+        <module>acmeair-common</module>
+        <module>acmeair-services</module>
+        <module>acmeair-services-jpa</module>
+        <module>acmeair-webapp</module>
+        <module>acmeair-itests</module>
+    </modules>
+    
+    <!-- Define dependency version information -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.9</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.derby</groupId>
+                <artifactId>derby</artifactId>
+                <version>10.10.1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.9.13</version>
+            </dependency>            
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-jpa_2.0_spec</artifactId>
+                <version>1.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-jaxrs_1.1_spec</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-servlet_3.0_spec</artifactId>
+                <version>1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+    <dependencies>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.0.6</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
-<!--<distributionManagement>                                                                                -->
-<!--    <snapshotRepository>                                                                                -->
-<!--        <id>domU-12-31-39-0A-11-D1.compute-1.internal</id>                                              -->
-<!--        <name>domU-12-31-39-0A-11-D1.compute-1.internal-snapshots</name>                                -->
-<!--        <uniqueVersion>false</uniqueVersion>                                                            -->
-<!--        <url>http://129.35.212.207:8081/artifactory/libs-snapshot-local</url>-->
-<!--    </snapshotRepository>                                                                               -->
-<!--</distributionManagement>                                                                               -->
-<distributionManagement>
-    <snapshotRepository>
-        <id>ArtifactoryLocalHost</id>
-        <name>ArtifactoryLocalHost</name>
-        <uniqueVersion>false</uniqueVersion>
-        <url>http://129.35.212.207:8081/artifactory/libs-snapshot-local</url>
-    </snapshotRepository>
-</distributionManagement>
-
+    
+    <build>
+        <!-- Define and configure plugins -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>2.5.1</version>
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.3</version>
+                    <configuration>
+                        <!-- Ignore error about missing web.xml -->
+                        <failOnMissingWebXml>false</failOnMissingWebXml>
+                        <archive>
+                            <!-- Do not include META-INF/maven to avoid long file problems on windows -->
+                            <addMavenDescriptor>false</addMavenDescriptor>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.4.3</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.5</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>2.5</version>
+                    <configuration>
+                        <forkMode>once</forkMode>
+                        <forkedProcessTimeoutInSeconds>300</forkedProcessTimeoutInSeconds>
+                        <!-- Specify which test classes are integration tests -->
+                        <includes>
+                            <include>**/Test*.java</include>
+                            <include>**/*Test.java</include>
+                        </includes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>integration-test</goal>
+                                <goal>verify</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

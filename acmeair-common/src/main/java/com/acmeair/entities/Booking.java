@@ -16,18 +16,28 @@
 package com.acmeair.entities;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
 
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
+@Entity
 public class Booking implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
+	
+	@EmbeddedId
 	private BookingPK pkey;
-
-	@SuppressWarnings("unused")
-	private BookingPK _id;
+	
 	private FlightPK flightKey;
 	private Date dateOfBooking;
+	
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name="customerId",referencedColumnName="id")
 	private Customer customer;
+	
 	private Flight flight;
 	
 	public Booking() {
@@ -35,7 +45,6 @@ public class Booking implements Serializable{
 	
 	public Booking(String id, Date dateOfFlight, Customer customer, Flight flight) {
 		this.pkey = new BookingPK(customer.getUsername(),id);
-		this._id = this.pkey;
 		this.flightKey = flight.getPkey();
 		this.dateOfBooking = dateOfFlight;
 		this.customer = customer;
