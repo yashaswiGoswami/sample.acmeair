@@ -18,7 +18,7 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>com.acmeair</groupId>
+        <groupId>net.wasdev.wlp.sample</groupId>
         <artifactId>acmeair</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -28,7 +28,7 @@
     
     <dependencies>
         <dependency>
-            <groupId>com.acmeair</groupId>
+            <groupId>net.wasdev.wlp.sample</groupId>
             <artifactId>acmeair-common</artifactId>
             <version>${project.version}</version>
         </dependency>

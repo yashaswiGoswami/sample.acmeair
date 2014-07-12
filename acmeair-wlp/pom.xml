@@ -18,7 +18,7 @@
     <modelVersion>4.0.0</modelVersion>
     
     <parent>
-        <groupId>com.acmeair</groupId>
+        <groupId>net.wasdev.wlp.sample</groupId>
         <artifactId>acmeair</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -29,13 +29,13 @@
     
     <dependencies>
         <dependency>
-            <groupId>com.acmeair</groupId>
+            <groupId>net.wasdev.wlp.sample</groupId>
             <artifactId>acmeair-webapp</artifactId>
             <version>${project.version}</version>
             <type>war</type>
         </dependency>
         <dependency>
-            <groupId>com.acmeair</groupId>
+            <groupId>net.wasdev.wlp.sample</groupId>
             <artifactId>acmeair-common</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -129,7 +129,7 @@
                                     <destFileName>derby.jar</destFileName>
                                 </artifactItem>
                                 <artifactItem>
-                                    <groupId>com.acmeair</groupId>
+                                    <groupId>net.wasdev.wlp.sample</groupId>
                                     <artifactId>acmeair-webapp</artifactId>
                                     <type>war</type>
                                     <overWrite>false</overWrite>
