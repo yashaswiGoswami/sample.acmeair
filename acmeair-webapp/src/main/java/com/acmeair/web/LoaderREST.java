@@ -48,7 +48,7 @@ public class LoaderREST {
     @GET
     @Path("/load")
     @Produces("text/plain")
-    public String load() {
+    public synchronized String load() {
         try {
             loadCustomers(10);
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class LoaderREST {
     @GET
     @Path("/loadSmall")
     @Produces("text/plain")
-    public String loadCustomers() {
+    public synchronized String loadCustomers() {
         try {
             loadCustomers(5);
         } catch (Exception e) {
