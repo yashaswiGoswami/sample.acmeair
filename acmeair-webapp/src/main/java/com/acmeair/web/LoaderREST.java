@@ -65,7 +65,7 @@ public class LoaderREST {
     @GET
     @Path("/loadSmall")
     @Produces("text/plain")
-    public synchronized String loadCustomers() {
+    public synchronized String loadSmall() {
         try {
             loadCustomers(5);
         } catch (Exception e) {
@@ -73,6 +73,23 @@ public class LoaderREST {
         }
         try {
             loadFlights(5);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "Sample data loaded.";
+    }
+
+    @GET
+    @Path("/loadTiny")
+    @Produces("text/plain")
+    public synchronized String loadTiny() {
+        try {
+            loadCustomers(2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            loadFlights(2);
         } catch (Exception e) {
             e.printStackTrace();
         }
