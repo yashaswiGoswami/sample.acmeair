@@ -45,55 +45,43 @@ public class LoaderREST {
     private CustomerService customerService = ServiceLocator.getService(CustomerService.class);
     private FlightService flightService = ServiceLocator.getService(FlightService.class);
 
+    private static Object lock = new Object();
+
     @GET
     @Path("/load")
     @Produces("text/plain")
-    public synchronized String load() {
-        try {
-            loadCustomers(10);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            loadFlights(30);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "Sample data loaded.";
+    public String load() {
+        return loadData(10, 30);
     }
 
     @GET
     @Path("/loadSmall")
     @Produces("text/plain")
-    public synchronized String loadSmall() {
-        try {
-            loadCustomers(5);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            loadFlights(5);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "Sample data loaded.";
+    public String loadSmall() {
+        return loadData(5, 5);
     }
 
     @GET
     @Path("/loadTiny")
     @Produces("text/plain")
-    public synchronized String loadTiny() {
-        try {
-            loadCustomers(2);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public String loadTiny() {
+        return loadData(2, 2);
+    }
+
+    private String loadData(long numCustomers, int segments) {
+        synchronized (lock) {
+            try {
+                loadCustomers(numCustomers);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                loadFlights(segments);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return "Sample data loaded."; 
         }
-        try {
-            loadFlights(2);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "Sample data loaded.";
     }
 
     public void loadCustomers(long numCustomers) {
