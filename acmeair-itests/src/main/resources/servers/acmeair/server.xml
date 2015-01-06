@@ -12,6 +12,7 @@
     <httpEndpoint id="defaultHttpEndpoint"
                   host="*"
                   httpPort="${httpPort}" >
+                  httpsPort="${httpsPort}" >
       <tcpOptions soReuseAddr="true"/>
     </httpEndpoint>
 
