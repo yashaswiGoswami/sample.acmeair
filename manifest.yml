@@ -1,0 +1,11 @@
+---
+declared-services:
+  acmeairdatasource:
+    label: sqldb
+    plan: sqldb_free
+
+applications:
+- name: acmeair
+  path: ./acmeair-webapp/target/acmeair-webapp-1.0-SNAPSHOT.war
+  services:
+  - acmeairdatasource
