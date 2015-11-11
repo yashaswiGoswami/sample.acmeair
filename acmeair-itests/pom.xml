@@ -66,7 +66,7 @@
                 <plugin>
                     <groupId>net.wasdev.wlp.maven.plugins</groupId>
                     <artifactId>liberty-maven-plugin</artifactId>
-                    <version>1.0</version>  
+                    <version>1.1</version>  
                 </plugin>  
             </plugins>
         </pluginManagement>
@@ -139,11 +139,6 @@
     <profiles>
         <profile>
             <id>run-its</id>
-            <activation>
-                <property>
-                    <name>wlpInstallDir</name>
-                </property>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -169,6 +164,14 @@
                         <artifactId>liberty-maven-plugin</artifactId>
                         <executions>
                             <execution>
+                                <id>install-liberty</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>install-server</goal>
+                                    <goal>install-feature</goal>
+                                </goals>
+                            </execution>
+                            <execution>
                                 <id>start-liberty-server</id>
                                 <phase>pre-integration-test</phase>
                                 <goals>
@@ -190,7 +193,14 @@
                             </execution>
                         </executions>
                         <configuration>
-                            <installDirectory>${wlpInstallDir}</installDirectory>
+                            <install>
+                                <type>kernel</type>
+                            </install>
+                            <features>  
+                                <acceptLicense>true</acceptLicense>
+                                <feature>jaxrs-1.1</feature>
+                                <feature>jpa-2.0</feature>
+                            </features>
                             <userDirectory>${project.build.directory}/usr</userDirectory>
                             <serverName>acmeair</serverName>
                         </configuration>
