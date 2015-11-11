@@ -34,3 +34,6 @@ Click the button below to deploy your own copy of this application to [Bluemix](
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/WASdev/sample.acmeair.git)
 
+[Liberty Maven Plug-in]: https://github.com/WASdev/ci.maven
+
+
