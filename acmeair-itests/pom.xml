@@ -138,17 +138,16 @@
     
     <profiles>
         <profile>
-<!--
+
             <id>run-its</id>
             <activation>
                 <property>
                     <name>wlpInstallDir</name>
                 </property>
             </activation>
--->
-            <build>
+        <build>
                 <plugins>
-<!--
+
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>build-helper-maven-plugin</artifactId>
@@ -167,8 +166,8 @@
                             </execution>
                         </executions>
                     </plugin>                               
--->
-<!--
+
+
                     <plugin>
                         <groupId>net.wasdev.wlp.maven.plugins</groupId>
                         <artifactId>liberty-maven-plugin</artifactId>
@@ -200,8 +199,8 @@
                             <serverName>acmeair</serverName>
                         </configuration>
                     </plugin>
--->
-<!--
+
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
@@ -211,7 +210,7 @@
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>
--->
+
                 </plugins>
             </build>
         </profile>
